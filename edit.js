@@ -80,3 +80,30 @@ function countText() {
     var charsCount = sourceText.length;
     document.getElementById('statusBar').innerHTML = 'CHARS = ' + charsCount;
 }
+function gen(ext, content) {
+    var dataString = 'ext=' + ext + '&content=' + content;
+    $.ajax({
+        type: "POST",
+        url: "gen.php",
+        data: dataString,
+        cache: false,
+        success: function(html) {
+            window.location.reload();
+        }
+    });
+    return false;
+}
+function wipe(ext) {
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            window.location.reload();
+        }
+    };
+    xmlhttp.open("GET","wipe.php?ext="+ext,false);
+    xmlhttp.send();
+}

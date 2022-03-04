@@ -1,10 +1,3 @@
-function playAudio(obj, name) {
-    obj.src = name;
-    obj.play();
-}
-function pauseAudio(obj) {
-    obj.pause();
-}
 function playMIDI(id) {
     MIDIjs.play(id);
 }

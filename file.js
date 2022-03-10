@@ -112,3 +112,17 @@ function copy(name, to) {
     xmlhttp.open("GET","copy.php?name="+name+"&to="+to,false);
     xmlhttp.send();
 }
+function upload(dir, file) {
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.location.reload();
+        }
+    }
+    xmlhttp.open("POST","upload.php?dir="+dir+"&file="+file,false);
+    xmlhttp.send();
+}

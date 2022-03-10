@@ -112,20 +112,3 @@ function copy(name, to) {
     xmlhttp.open("GET","copy.php?name="+name+"&to="+to,false);
     xmlhttp.send();
 }
-function upload() {
-    var formData = new FormData();
-    formData.append('dir', $('#dir').val());
-    formData.append('file', $('input[type=file]')[0].files[0]);
-    $.ajax({
-        type: "POST",
-        url: "upload.php",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(html) {
-            window.location.reload();
-        }
-    });
-    return false;
-}

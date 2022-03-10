@@ -86,6 +86,18 @@ function move(name, to) {
     xmlhttp.open("GET","move.php?name="+name+"&to="+to,false);
     xmlhttp.send();
 }
+function moveBulk(name, to) {
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {}
+    }
+    xmlhttp.open("GET","move.php?name="+name+"&to="+to,false);
+    xmlhttp.send();
+}
 function copy(name, to) {
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();

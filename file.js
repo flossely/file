@@ -31,3 +31,72 @@ function fileSearch() {
     xmlhttp.open("GET","?dir="+dir+"&q="+q,false);
     xmlhttp.send();
 }
+function write(name, content) {
+    var dataString = 'name=' + name + '&content=' + content;
+    $.ajax({
+        type: "POST",
+        url: "write.php",
+        data: dataString,
+        cache: false,
+        success: function(html) {
+            window.location.reload();
+        }
+    });
+    return false;
+}
+function del(name) {
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.location.reload();
+        }
+    }
+    xmlhttp.open("GET","delete.php?name="+name,false);
+    xmlhttp.send();
+}
+function mkdir(name) {
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.location.reload();
+        }
+    }
+    xmlhttp.open("GET","mkdir.php?name="+name,false);
+    xmlhttp.send();
+}
+function move(name, to) {
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.location.reload();
+        }
+    }
+    xmlhttp.open("GET","move.php?name="+name+"&to="+to,false);
+    xmlhttp.send();
+}
+function copy(name, to) {
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.location.reload();
+        }
+    }
+    xmlhttp.open("GET","copy.php?name="+name+"&to="+to,false);
+    xmlhttp.send();
+}

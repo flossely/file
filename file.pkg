@@ -1,1 +1,1 @@
-flossely=|2|=LIB=|2|=1.2=|2|=56=|2|=November 2021=|2|=A JS library for any online text editor.=|1|=edit.js;gen.php;wipe.php;file.js;
+flossely=|2|=LIB=|2|=2.0=|2|=520=|2|=November 2021=|2|=File management and access module for web-based apps, platforms and environments.=|1|=copy.php;edit.js;file.js;gen.php;mkdir.php;move.php;wipe.php;write.php;

@@ -113,16 +113,15 @@ function copy(name, to) {
     xmlhttp.send();
 }
 function upload(dir, file) {
-    if (window.XMLHttpRequest) {
-        xmlhttp=new XMLHttpRequest();
-    } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {
-            document.location.reload();
+    var dataString = 'dir=' + dir + '&file=' + file;
+    $.ajax({
+        type: "POST",
+        url: "upload.php",
+        data: dataString,
+        cache: false,
+        success: function(html) {
+            window.location.reload();
         }
-    }
-    xmlhttp.open("POST","upload.php?dir="+dir+"&file="+file,false);
-    xmlhttp.send();
+    });
+    return false;
 }

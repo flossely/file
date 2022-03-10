@@ -1,5 +1,5 @@
 <?php
-$dir = $_REQUEST['dir'];
+$dir = $_POST['dir'];
 $files = $_POST['file'];
 $count = count($files['name']);
 for ($i = 0; $i < $count; $i++) {

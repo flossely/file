@@ -1,10 +1,11 @@
 <?php
-$dir = $_POST['dir'];
-$count = count($_FILES['file']['name']);
+$dir = $_REQUEST['dir'];
+$files = $_POST['file'];
+$count = count($files['name']);
 for ($i = 0; $i < $count; $i++) {
     if ($count <= 5) {
-        $tmp = $_FILES['file']['tmp_name'][$i];
-        $file = $_FILES['file']['name'][$i];
+        $tmp = $files['file']['tmp_name'][$i];
+        $file = $files['file']['name'][$i];
         move_uploaded_file($tmp, $dir.'/'.$file);
         chmod($dir.'/'.$file, 0777);
     }

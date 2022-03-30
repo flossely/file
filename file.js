@@ -31,7 +31,7 @@ function fileSearch() {
     xmlhttp.open("GET","?dir="+dir+"&q="+q,false);
     xmlhttp.send();
 }
-function write(name, content) {
+function write(name, content, bulk) {
     var dataString = 'name=' + name + '&content=' + content;
     $.ajax({
         type: "POST",
@@ -39,12 +39,14 @@ function write(name, content) {
         data: dataString,
         cache: false,
         success: function(html) {
-            window.location.reload();
+            if (bulk !== true) {
+                document.location.reload();
+            }
         }
     });
     return false;
 }
-function del(name) {
+function del(name, bulk) {
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {
@@ -52,13 +54,15 @@ function del(name) {
     }
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
-            document.location.reload();
+            if (bulk !== true) {
+                document.location.reload();
+            }
         }
     }
     xmlhttp.open("GET","delete.php?name="+name,false);
     xmlhttp.send();
 }
-function mkdir(name) {
+function mkdir(name, bulk) {
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {
@@ -66,13 +70,15 @@ function mkdir(name) {
     }
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
-            document.location.reload();
+            if (bulk !== true) {
+                document.location.reload();
+            }
         }
     }
     xmlhttp.open("GET","mkdir.php?name="+name,false);
     xmlhttp.send();
 }
-function move(name, to) {
+function move(name, to, bulk) {
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {
@@ -80,25 +86,15 @@ function move(name, to) {
     }
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
-            document.location.reload();
+            if (bulk !== true) {
+                document.location.reload();
+            }
         }
     }
     xmlhttp.open("GET","move.php?name="+name+"&to="+to,false);
     xmlhttp.send();
 }
-function moveBulk(name, to) {
-    if (window.XMLHttpRequest) {
-        xmlhttp=new XMLHttpRequest();
-    } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {}
-    }
-    xmlhttp.open("GET","move.php?name="+name+"&to="+to,false);
-    xmlhttp.send();
-}
-function copy(name, to) {
+function copy(name, to, bulk) {
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {
@@ -106,7 +102,9 @@ function copy(name, to) {
     }
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
-            document.location.reload();
+            if (bulk !== true) {
+                document.location.reload();
+            }
         }
     }
     xmlhttp.open("GET","copy.php?name="+name+"&to="+to,false);

@@ -4,6 +4,13 @@ function playMIDI(id) {
 function pauseMIDI(id) {
     MIDIjs.pause(id);
 }
+function playVideo(obj, name) {
+    obj.src = name + "?rev=<?=time();?>";
+    obj.play();
+}
+function pauseVideo(obj) {
+    obj.pause();
+}
 function levelUp(dir) {
     if (dir.toString('').includes('/')) {
         var split = dir.toString('').split('/');

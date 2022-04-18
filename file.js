@@ -1,17 +1,31 @@
-function playMIDI(id) {
-    MIDIjs.play(id);
-}
-function pauseMIDI(id) {
-    MIDIjs.pause(id);
-}
-function playVideo(obj, name) {
+function playAudio(obj, name)
+{
     obj.src = name + "?rev=<?=time();?>";
     obj.play();
 }
-function pauseVideo(obj) {
+function pauseAudio(obj)
+{
     obj.pause();
 }
-function levelUp(dir) {
+function playMIDI(id)
+{
+    MIDIjs.play(id);
+}
+function pauseMIDI(id)
+{
+    MIDIjs.pause(id);
+}
+function playVideo(obj, name)
+{
+    obj.src = name + "?rev=<?=time();?>";
+    obj.play();
+}
+function pauseVideo(obj)
+{
+    obj.pause();
+}
+function levelUp(dir)
+{
     if (dir.toString('').includes('/')) {
         var split = dir.toString('').split('/');
         var count = split.length;
@@ -22,7 +36,8 @@ function levelUp(dir) {
     }
     window.location.href = '?dir=' + link;
 }
-function fileSearch() {
+function fileSearch()
+{
     var dir = search.name;
     var q = search.value;
     if (window.XMLHttpRequest) {
@@ -38,7 +53,8 @@ function fileSearch() {
     xmlhttp.open("GET","?dir="+dir+"&q="+q,false);
     xmlhttp.send();
 }
-function write(name, content, bulk) {
+function set(name, content, bulk)
+{
     var dataString = 'name=' + name + '&content=' + content;
     $.ajax({
         type: "POST",
@@ -53,7 +69,24 @@ function write(name, content, bulk) {
     });
     return false;
 }
-function del(name, bulk) {
+function write(name, content, bulk)
+{
+    var dataString = 'name=' + name + '&content=' + content;
+    $.ajax({
+        type: "POST",
+        url: "write.php",
+        data: dataString,
+        cache: false,
+        success: function(html) {
+            if (bulk !== true) {
+                document.location.reload();
+            }
+        }
+    });
+    return false;
+}
+function del(name, bulk)
+{
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {
@@ -69,7 +102,8 @@ function del(name, bulk) {
     xmlhttp.open("GET","delete.php?name="+name,false);
     xmlhttp.send();
 }
-function mkdir(name, bulk) {
+function mkdir(name, bulk)
+{
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {
@@ -85,7 +119,8 @@ function mkdir(name, bulk) {
     xmlhttp.open("GET","mkdir.php?name="+name,false);
     xmlhttp.send();
 }
-function move(name, to, bulk) {
+function move(name, to, bulk)
+{
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {
@@ -101,7 +136,8 @@ function move(name, to, bulk) {
     xmlhttp.open("GET","move.php?name="+name+"&to="+to,false);
     xmlhttp.send();
 }
-function copy(name, to, bulk) {
+function copy(name, to, bulk)
+{
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {
@@ -116,4 +152,80 @@ function copy(name, to, bulk) {
     }
     xmlhttp.open("GET","copy.php?name="+name+"&to="+to,false);
     xmlhttp.send();
+}
+function gen(ext, content, bulk)
+{
+    var dataString = 'ext=' + ext + '&content=' + content;
+    $.ajax({
+        type: "POST",
+        url: "gen.php",
+        data: dataString,
+        cache: false,
+        success: function(html) {
+            if (bulk !== true) {
+                document.location.reload();
+            }
+        }
+    });
+    return false;
+}
+function wipe(ext, bulk)
+{
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            if (bulk !== true) {
+                document.location.reload();
+            }
+        }
+    };
+    xmlhttp.open("GET","wipe.php?ext="+ext,false);
+    xmlhttp.send();
+}
+function hash(key, name, data = '', bulk)
+{
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            if (bulk !== true) {
+                document.location.reload();
+            }
+        }
+    }
+    xmlhttp.open("GET","hash.php?key="+key+"&name="+name+"&data="+data,false);
+    xmlhttp.send();
+}
+function base64(key, input, output, bulk)
+{
+    if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            if (bulk !== true) {
+                document.location.reload();
+            }
+        }
+    }
+    xmlhttp.open("GET","base64.php?key="+key+"&input="+input+"&output="+output,false);
+    xmlhttp.send();
+}
+function mute(x)
+{
+    if (x != '') {
+        x = '';
+    } else {
+        x = 'true';
+    }
+    set('sounds', x);
 }

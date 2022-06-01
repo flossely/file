@@ -1,6 +1,6 @@
 function playAudio(obj, name)
 {
-    obj.src = name + "?rev=<?=time();?>";
+    obj.src = name;
     obj.play();
 }
 function pauseAudio(obj)

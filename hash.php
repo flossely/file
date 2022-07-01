@@ -6,9 +6,15 @@ if ($fxkey == 'in') {
     $dataExp = explode(';', $inputData);
     $outFile = '';
     foreach ($dataExp as $key=>$part) {
-        $partExp = explode(':', $part);
-        $partName = $partExp[0];
-        $partContent = $partExp[1];
+        if (strpos($part, ':') !== false) {
+            $partExp = explode(':', $part);
+            $partName = $partExp[0];
+            $partContent = bin2hex($partExp[1]);
+        } else {
+            $partName = $part;
+            $openCont = file_get_contents($partName);
+            $partContent = bin2hex($openCont);
+        }
         $outFile .= $partName.'|[2]|'.$partContent.'|[1]|';
     }
     file_put_contents($filename, $outFile);

@@ -1,29 +1,3 @@
-function playAudio(obj, name)
-{
-    obj.src = name;
-    obj.play();
-}
-function pauseAudio(obj)
-{
-    obj.pause();
-}
-function playMIDI(id)
-{
-    MIDIjs.play(id);
-}
-function pauseMIDI(id)
-{
-    MIDIjs.pause(id);
-}
-function playVideo(obj, name)
-{
-    obj.src = name + "?rev=<?=time();?>";
-    obj.play();
-}
-function pauseVideo(obj)
-{
-    obj.pause();
-}
 function levelUp(dir)
 {
     if (dir.toString('').includes('/')) {
@@ -63,7 +37,7 @@ function set(name, content, bulk)
         cache: false,
         success: function(html) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     });
@@ -79,7 +53,7 @@ function write(name, content, bulk)
         cache: false,
         success: function(html) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     });
@@ -95,7 +69,7 @@ function del(name, bulk)
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     }
@@ -112,7 +86,7 @@ function mkdir(name, bulk)
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     }
@@ -129,7 +103,7 @@ function move(name, to, bulk)
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     }
@@ -146,7 +120,7 @@ function copy(name, to, bulk)
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     }
@@ -163,7 +137,7 @@ function gen(ext, content, bulk)
         cache: false,
         success: function(html) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     });
@@ -179,7 +153,7 @@ function wipe(ext, bulk)
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     };
@@ -196,7 +170,7 @@ function hash(key, name, data = '', bulk)
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     }
@@ -213,19 +187,10 @@ function base64(key, input, output, bulk)
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
             if (bulk !== true) {
-                document.location.reload();
+                window.location.reload();
             }
         }
     }
     xmlhttp.open("GET","base64.php?key="+key+"&input="+input+"&output="+output,false);
     xmlhttp.send();
-}
-function mute(x)
-{
-    if (x != '') {
-        x = '';
-    } else {
-        x = 'true';
-    }
-    set('sounds', x);
 }

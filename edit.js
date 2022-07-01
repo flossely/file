@@ -21,6 +21,13 @@ function replaceText(stri)
     var strp = str.toString().replace(stri, stro);
     document.getElementById('content').value = strp;
 }
+function replaceTextAll(stri)
+{
+    var str = document.getElementById('content').value;
+    var stro = document.getElementById('replacebox').value;
+    var strp = str.toString().replaceAll(stri, stro);
+    document.getElementById('content').value = strp;
+}
 function countText()
 {
     var sourceText = document.getElementById('content').value;
